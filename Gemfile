@@ -28,9 +28,19 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 gem "bootsnap", require: false
 
+gem 'rubocop-rails', require: false
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
 group :development do
   gem "web-console"
+end
+
+group :development, :test do
+  gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'pry-rails'
+  gem 'rspec-rails', '~> 6.0.0'
 end
