@@ -5,3 +5,8 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+Metrics/MethodLength:
+  Max: 25
+Layout/LineLength:
+  Exclude:
+    - 'config/**/*'

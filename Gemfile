@@ -35,6 +35,8 @@ gem 'rubocop-rails', require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
+gem 'devise'
+
 group :development do
   gem 'web-console'
 end
