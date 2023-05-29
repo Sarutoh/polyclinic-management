@@ -5,5 +5,6 @@ class ProfileController < ApplicationController
 
   def show
     @current_user = current_user
+    @categories = Category.all
   end
 end
