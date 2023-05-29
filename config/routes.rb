@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+
+  resource :profile, only: :show
+
+  root to: 'profile#show'
 end
