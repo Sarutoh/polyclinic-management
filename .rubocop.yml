@@ -10,3 +10,5 @@ Metrics/MethodLength:
 Layout/LineLength:
   Exclude:
     - 'config/**/*'
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
