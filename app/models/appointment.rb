@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Appointment < ApplicationRecord
   before_update :close_appointment, if: :recomendation_changed?
 
