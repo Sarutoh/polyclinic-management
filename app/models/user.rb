@@ -8,6 +8,9 @@ class User < ApplicationRecord
                            presence: true,
                            numericality: true,
                            length: { minimun: 10, maximum: 16 }
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 
   private
 

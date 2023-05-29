@@ -7,7 +7,7 @@
         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle mt-1" data-bs-toggle="dropdown" aria-expanded="false">
         </a>
           <ul class="dropdown-menu text-small shadow">
-            <li><span class="dropdown-header">Your signed in as <strong><%= full_name %></strong></span></li>
+            <li><span class="dropdown-header">Your signed in as <strong><%= current_user.full_name %></strong></span></li>
             <li><hr class="dropdown-divider"></li>
             <li><%= link_to 'Edit profile', edit_user_registration_path, method: :get, class: "dropdown-item" %></li>
             <li><hr class="dropdown-divider"></li>
