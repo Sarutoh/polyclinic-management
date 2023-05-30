@@ -5,7 +5,7 @@ Devise.setup do |config|
 
   require 'devise/orm/active_record'
 
-  config.authentication_keys = [:phone_number]
+  # config.authentication_keys = [:phone_number]
 
   config.case_insensitive_keys = [:phone_number]
 

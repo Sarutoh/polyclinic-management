@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, authentication_keys: [:phone_number]
 
   validates :phone_number, uniqueness: true,
                            presence: true,
@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def admin?
+    false
   end
 
   private

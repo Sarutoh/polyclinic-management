@@ -10,8 +10,8 @@
         <td><strong><%= @appointment.appointment_date.to_fs(:long_ordinal) %></strong></td>
       </tr>
       <tr>
-        <th scope="row">Doctor</th>
-        <td colspan="2"><strong><%= @appointment.doctor.full_name %></strong></td>
+        <th scope="row"><%= current_user.doctor? ? 'Patient' : 'Doctor'%></th>
+        <td colspan="2"><strong><%= current_user.doctor? ? @appointment.patient.full_name: @appointment.doctor.full_name %></strong></td>
       </tr>
       <tr>
         <th scope="row">Recomendation</th>
@@ -19,4 +19,7 @@
       </tr>
     </tbody>
   </table>
+  <% if current_user.doctor? && able_to_recomendate?(@appointment) %>
+    <%= link_to 'Make recomendation', edit_appointment_path(@appointment), method: :get %>
+  <% end %>  
 </div>

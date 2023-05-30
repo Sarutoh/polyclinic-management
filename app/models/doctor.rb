@@ -6,4 +6,12 @@ class Doctor < User
   has_many :patients, through: :appointments
 
   scope :by_category, ->(category) { where(category_id: category) }
+
+  def patient?
+    false
+  end
+
+  def doctor?
+    true
+  end
 end

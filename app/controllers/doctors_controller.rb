@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
 class DoctorsController < ApplicationController
-  def index
-    @doctors = Doctor.all
-  end
-
   def list
-    # binding.pry
-    @doctors = Doctor.by_category(params[:category_id])
+    @patients = Patients.all
 
     respond_to do |format|
       format.turbo_stream
