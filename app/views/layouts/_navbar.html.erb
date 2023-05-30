@@ -1,0 +1,21 @@
+<% unless !user_signed_in? %>
+  <nav class="py-2 border-bottom">
+    <div class="px-3 d-flex flex-wrap">
+      <%= link_to 'Polyclinic Managment', root_path, class: "navbar-brand fs-2 header-logo text-dark nav me-auto" %>
+      <div class="dropdown d-flex">
+        <%#= avatar(current_user) %>
+        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle mt-1" data-bs-toggle="dropdown" aria-expanded="false">
+        </a>
+          <ul class="dropdown-menu text-small shadow">
+            <li><span class="dropdown-header">Your signed in as <strong><%= current_user.full_name %></strong></span></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to 'Edit profile', edit_user_registration_path, method: :get, class: "dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to 'My appointments', appointments_path(current_user.appointments), method: :get, class: "dropdown-item" %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+<% end %>

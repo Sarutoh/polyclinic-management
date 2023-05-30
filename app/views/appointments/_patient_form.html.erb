@@ -1,0 +1,20 @@
+<div class='container mt-2'>
+  <%= form_for Appointment.new do |f| %>
+    <%= f.hidden_field :patient_id, value: current_user.id %>
+
+    <%= f.label :appointment_date, class: 'form-label'%>
+    <%= f.datetime_field :appointment_date, min: Date.tomorrow.at_beginning_of_day, class: 'form-control', required: true %>
+
+    <div data-controller="get">
+      <label> Category </label>
+      <%= select("category", "category_id", @categories.collect {|c| [ c.name, c.id ] }, { include_blank: true }, { class: 'form-select', data: { action: "change->get#category_doctors" }} ) %>
+
+      <%= f.label :doctor_id, class: 'form-label' %>
+      <%= f.select :doctor_id, [], {}, { class: 'form-control', required: true } %>
+    </div>
+
+    <div>
+      <%= f.submit 'Make doctor appointment', class: "btn btn-success mt-2 me-2 float-sm-end" %>
+    </div>
+  <% end %>
+</div>

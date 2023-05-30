@@ -1,0 +1,13 @@
+<h2> Your nearest appointment </h2>
+<% if @nearest %> 
+  <%= render partial: @nearest %>
+<% else %>
+  You do not have planned appoitnments yet
+<% end %>
+
+<h2 class='mt-3'> Your last appointment </h2>
+<% if @last %> 
+  <%= render partial: @last %>
+<% else %>
+  You do not have finished appoitnments yet
+<% end %>

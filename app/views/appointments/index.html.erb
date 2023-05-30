@@ -1,0 +1,17 @@
+<div class='container'>
+  <h3> Your Appointments </h3>
+
+  <h2> Finished </h2>
+  <% if @finished.any? %>
+    <%= render partial: @finished %>
+  <% else %>
+    You do not have any finished appointment yet
+  <% end %>
+
+  <h2> Planned </h2>
+  <% if @planned.any? %>
+    <%= render partial: @planned %>
+  <% else %>
+     You do not have any planned appointment yet
+  <% end %>
+</div>

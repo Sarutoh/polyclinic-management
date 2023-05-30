@@ -1,5 +1,13 @@
-<h1>This is your profile</h1>
+<div class="container mt-3">
+  <h1>You can make appointment right here</h1>
 
-<p><%= current_user.first_name + current_user.last_name %></p>
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <%= render "appointments/info", last: @last, nearest: @nearest %>
+    </div>
 
-<%= button_to 'Log Out', destroy_user_session_path, method: :delete %>
+    <div class="col-md-6 border border-2 border-light rounded-4 pb-2">
+      <%= render "appointments/patient_form" %>
+    </div>
+  </div>
+</div>

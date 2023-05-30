@@ -1,0 +1,22 @@
+<div class='container'>
+  <table class="table table-striped table-hover">
+    <tbody>
+      <tr>
+        <th scope="row">Description</th>
+        <td><strong><%= @appointment.description %></strong></td>
+      </tr>
+      <tr>
+        <th scope="row">Appointment date</th>
+        <td><strong><%= @appointment.appointment_date.to_fs(:long_ordinal) %></strong></td>
+      </tr>
+      <tr>
+        <th scope="row">Doctor</th>
+        <td colspan="2"><strong><%= @appointment.doctor.full_name %></strong></td>
+      </tr>
+      <tr>
+        <th scope="row">Recomendation</th>
+        <td colspan="2"><strong><%= @appointment.recomendation %></strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
