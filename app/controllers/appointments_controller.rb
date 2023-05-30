@@ -2,7 +2,8 @@
 
 class AppointmentsController < ApplicationController
   def index
-    @appointments = Appointment.where(patient_id: current_user.id)
+    @finished = current_user.appointments.where('appointment_date < ? ', Time.zone.now).order('appointment_date desc')
+    @planned = current_user.appointments.where('appointment_date > ? ', Time.zone.now).order('appointment_date asc')
   end
 
   def show

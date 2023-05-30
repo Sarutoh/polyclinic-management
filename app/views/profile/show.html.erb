@@ -1,23 +1,13 @@
-<h1>Welcome to Polyclinic Management app</h1>
+<div class="container mt-3">
+  <h1>You can make appointment right here</h1>
 
-<div class="row">
-  <div>
-    <%= form_for Appointment.new do |f| %>
-      <%= f.hidden_field :patient_id, value: current_user.id %>
-      <%= f.label :appointment_date, class: 'form-label'%>
-      <%= f.datetime_field :appointment_date, min: Date.tomorrow.middle_of_day, class: 'form-control' %>
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <%= render "appointments/info", last: @last, nearest: @nearest %>
+    </div>
 
-      <div data-controller="get">
-        <label class='form-control'> Category </label>
-        <%= select("category", "category_id", @categories.collect {|c| [ c.name, c.id ] }, { include_blank: true }, { class: 'form-control', data: { action: "change->get#category_doctors" }} ) %>
-
-        <%= f.label :doctor_id, class: 'form-label' %>
-        <%= f.select :doctor_id, [], {}, { class: 'form-control' } %>
-      </div>
-
-      <div>
-        <%= f.submit 'Submit', class: "button-secondary" %>
-      </div>
-    <% end %>
+    <div class="col-md-6 border border-2 border-light rounded-4 pb-2">
+      <%= render "appointments/patient_form" %>
+    </div>
   </div>
 </div>
