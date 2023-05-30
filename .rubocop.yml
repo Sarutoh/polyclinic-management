@@ -7,8 +7,13 @@ Style/Documentation:
   Enabled: false
 Metrics/MethodLength:
   Max: 25
+  Exclude:
+     - 'db/**/*'
 Layout/LineLength:
   Exclude:
     - 'config/**/*'
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
+Metrics/AbcSize:
+  Exclude:
+    - 'db/**/*'

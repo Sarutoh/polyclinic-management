@@ -25,7 +25,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.active_storage.service = :local
+  config.active_storage.service = :cloudinary
 
   config.active_support.deprecation = :log
 
@@ -38,6 +38,4 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   config.assets.quiet = true
-
-  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
