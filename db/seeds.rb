@@ -11,5 +11,5 @@ if Rails.env.production?
     password: Rails.application.credentials.admin.fetch(:password),
     password_confirmation: Rails.application.credentials.admin.fetch(:password)
   )
-  Category.DEFAULT_CATEGORIES.each { |dc| Category.create(dc) }
+  Category::DEFAULT_CATEGORIES.each { |dc| Category.create(dc) }
 end

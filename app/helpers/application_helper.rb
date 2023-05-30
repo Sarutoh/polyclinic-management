@@ -25,7 +25,23 @@ module ApplicationHelper
     end
   end
 
+  def participant(appointment)
+    if current_user.doctor?
+      participant_helper('Patient', appointment)
+    else
+      participant_helper('Doctor ', appointment)
+    end
+  end
+
+  def able_to_recomendate?(appointment)
+    appointment.appointment_date.past? && !appointment.closed
+  end
+
   private
+
+  def participant_helper(type, appointment)
+    safe_join([tag.div(type.to_s), tag.strong(appointment.send(type.downcase.to_sym).full_name.to_s)])
+  end
 
   def image_tag(avatar_size, url)
     tag.img src: url, class: 'rounded-pill d-block mr-1', width: avatar_size, height: avatar_size

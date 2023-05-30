@@ -15,6 +15,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def admin?
+    false
+  end
+
   private
 
   def email_required?
