@@ -1,0 +1,5 @@
+<ul>
+  <% @appointments.each do |a| %>
+    <li><%="#{a.doctor.full_name} at #{a.appointment_date}"%></li>
+  <% end %>
+</ul>

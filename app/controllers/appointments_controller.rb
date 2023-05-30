@@ -1,11 +1,8 @@
+# frozen_string_literal: true
+
 class AppointmentsController < ApplicationController
-  def create
-    @appointment = Appointment.new(create_params)
-    if @appointment.save
-      redirect_to appointment_path(@appointment)
-    else
-      redirect_to root_path
-    end
+  def index
+    @appointments = Appointment.where(patient_id: current_user.id)
   end
 
   def show
@@ -14,6 +11,15 @@ class AppointmentsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @appointment }
+    end
+  end
+
+  def create
+    @appointment = Appointment.new(create_params)
+    if @appointment.save
+      redirect_to appointment_path(@appointment)
+    else
+      redirect_to root_path
     end
   end
 

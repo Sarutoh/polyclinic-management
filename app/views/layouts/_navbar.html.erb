@@ -11,7 +11,7 @@
             <li><hr class="dropdown-divider"></li>
             <li><%= link_to 'Edit profile', edit_user_registration_path, method: :get, class: "dropdown-item" %></li>
             <li><hr class="dropdown-divider"></li>
-            <li><%= link_to 'My appointments', edit_user_registration_path, method: :get, class: "dropdown-item" %></li>
+            <li><%= link_to 'My appointments', appointments_path(current_user.appointments), method: :get, class: "dropdown-item" %></li>
             <li><hr class="dropdown-divider"></li>
             <li><%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
           </ul>

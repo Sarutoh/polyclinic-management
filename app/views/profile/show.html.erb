@@ -1,28 +1,17 @@
 <h1>Welcome to Polyclinic Management app</h1>
 
-<p><%= current_user.full_name %></p>
-<% # TODO: wip state; change it in next pr %>
-<% @categories.each do |category| %>
-  <%= category.name %>
-  <ul>
-    <% category.doctors.each do |doctor| %>
-      <li><%= doctor.first_name %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <div class="row">
   <div>
     <%= form_for Appointment.new do |f| %>
       <%= f.hidden_field :patient_id, value: current_user.id %>
       <%= f.label :appointment_date, class: 'form-label'%>
-      <%= f.date_field :appointment_date, min: 0.days.ago, class: 'form-control' %>
+      <%= f.datetime_field :appointment_date, min: Date.tomorrow.middle_of_day, class: 'form-control' %>
 
       <div data-controller="get">
         <label class='form-control'> Category </label>
         <%= select("category", "category_id", @categories.collect {|c| [ c.name, c.id ] }, { include_blank: true }, { class: 'form-control', data: { action: "change->get#category_doctors" }} ) %>
 
-        <%= f.label :doctor, class: 'form-label' %>
+        <%= f.label :doctor_id, class: 'form-label' %>
         <%= f.select :doctor_id, [], {}, { class: 'form-control' } %>
       </div>
 
