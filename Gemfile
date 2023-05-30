@@ -36,6 +36,12 @@ gem 'devise'
 
 gem 'cloudinary'
 
+gem 'activeadmin'
+
+gem 'cancancan'
+
+gem "sassc-rails"
+
 group :development do
   gem 'web-console'
 end
