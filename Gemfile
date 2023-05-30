@@ -40,7 +40,7 @@ gem 'activeadmin'
 
 gem 'cancancan'
 
-gem "sassc-rails"
+gem 'sassc-rails'
 
 group :development do
   gem 'web-console'

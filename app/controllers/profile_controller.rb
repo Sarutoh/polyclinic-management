@@ -8,5 +8,6 @@ class ProfileController < ApplicationController
     @last = current_user.appointments.where('appointment_date < ? ', Time.zone.now).order('appointment_date desc').first
     @nearest = current_user.appointments.where('appointment_date > ? ',
                                                Time.zone.now).order('appointment_date asc').first
+    authorize! :create, Appointment
   end
 end

@@ -4,6 +4,8 @@ class AppointmentsController < ApplicationController
   def index
     @finished = current_user.appointments.where('appointment_date < ? ', Time.zone.now).order('appointment_date desc')
     @planned = current_user.appointments.where('appointment_date > ? ', Time.zone.now).order('appointment_date asc')
+
+    authorize! :read, Appointment
   end
 
   def show
@@ -13,10 +15,15 @@ class AppointmentsController < ApplicationController
       format.html
       format.json { render json: @appointment }
     end
+
+    authorize! :read, Appointment
   end
 
   def create
+    authorize! :create, Appointment
+
     @appointment = Appointment.new(create_params)
+
     if @appointment.save
       redirect_to appointment_path(@appointment)
     else

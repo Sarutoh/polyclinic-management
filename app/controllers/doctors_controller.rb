@@ -3,10 +3,15 @@
 class DoctorsController < ApplicationController
   def index
     @doctors = Doctor.all
+
+    authorize! :read, Doctor
+  end
+
+  def create
+    authorize! :create, Doctor
   end
 
   def list
-    # binding.pry
     @doctors = Doctor.by_category(params[:category_id])
 
     respond_to do |format|
