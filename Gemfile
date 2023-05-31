@@ -21,7 +21,6 @@ gem 'stimulus-rails'
 
 gem 'cssbundling-rails'
 
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
 gem 'redis', '~> 4.0'
@@ -43,6 +42,7 @@ gem 'cancancan'
 gem 'sassc-rails'
 
 group :development do
+  gem 'bullet'
   gem 'web-console'
 end
 

@@ -27,9 +27,9 @@ module ApplicationHelper
 
   def participant(appointment)
     if current_user.doctor?
-      participant_helper('Patient', appointment)
+      safe_join([tag.div('Patient'), tag.strong(appointment.patient.full_name.to_s)])
     else
-      participant_helper('Doctor ', appointment)
+      safe_join([tag.div('Doctor'), tag.strong(appointment.doctor.full_name.to_s)])
     end
   end
 
@@ -37,11 +37,12 @@ module ApplicationHelper
     appointment.appointment_date.past? && !appointment.closed
   end
 
-  private
-
-  def participant_helper(type, appointment)
-    safe_join([tag.div(type.to_s), tag.strong(appointment.send(type.downcase.to_sym).full_name.to_s)])
+  def wait_to_recomend_id(appointment)
+    id = appointment.id
+    able_to_recomendate?(appointment) ? "wait_for_recomendation_#{id}" : "appointment_info_block_#{id}"
   end
+
+  private
 
   def image_tag(avatar_size, url)
     tag.img src: url, class: 'rounded-pill d-block mr-1', width: avatar_size, height: avatar_size

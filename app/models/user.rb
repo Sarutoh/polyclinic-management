@@ -6,10 +6,16 @@ class User < ApplicationRecord
 
   validates :phone_number, uniqueness: true,
                            presence: true,
-                           numericality: true,
-                           length: { minimun: 10, maximum: 16 }
+                           numericality: true
+
+  validate :phone_number_length
 
   has_one_attached :avatar
+
+  def phone_number_length
+    errors.add(:phone_number, ' is too short!') if phone_number.length < 10
+    errors.add(:phone_number, ' is too long!') if phone_number.length > 16
+  end
 
   def full_name
     "#{first_name} #{last_name}"
