@@ -37,6 +37,11 @@ module ApplicationHelper
     appointment.appointment_date.past? && !appointment.closed
   end
 
+  def wait_to_recomend_id(appointment)
+    id = appointment.id
+    able_to_recomendate?(appointment) ? "wait_for_recomendation_#{id}" : "appointment_info_block_#{id}"
+  end
+
   private
 
   def image_tag(avatar_size, url)
