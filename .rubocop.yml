@@ -19,6 +19,9 @@ Layout/LineLength:
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
 Metrics/AbcSize:
+  Enabled: false
+Rails/FilePath:
   Exclude:
-    - 'db/**/*'
-    - 'app/helpers/application_helper.rb'
+    - 'spec/rails_helper.rb'
+Rails/I18nLocaleTexts:
+  Enabled: false

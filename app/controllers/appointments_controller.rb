@@ -32,10 +32,14 @@ class AppointmentsController < ApplicationController
 
     @appointment = Appointment.new(create_params)
 
-    if @appointment.save
-      redirect_to appointment_path(@appointment)
-    else
-      redirect_to root_path
+    respond_to do |format|
+      if @appointment.save
+        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+        format.json { render :show, status: :created, location: @appointment }
+      else
+        format.html { redirect_to root_path }
+        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -44,10 +48,14 @@ class AppointmentsController < ApplicationController
 
     @appointment = Appointment.find(params[:id])
 
-    if @appointment.update(update_params)
-      redirect_to appointment_path(@appointment)
-    else
-      redirect_to root_path
+    respond_to do |format|
+      if @appointment.update(update_params)
+        format.html { redirect_to appointment_path(@appointment), notice: 'Appointment was successfully updated.' }
+        format.json { render :show, status: :ok, location: @appointment }
+      else
+        format.html { render :edit }
+        format.json { render json: @appointment.errors, status: :unprocessable_entity }
+      end
     end
   end
 
