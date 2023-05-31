@@ -4,10 +4,10 @@ class ProfileController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @categories = Category.all
-    @last = current_user.appointments.where('appointment_date < ? ', Time.zone.now).order('appointment_date desc').first
-    @nearest = current_user.appointments.where('appointment_date > ? ',
-                                               Time.zone.now).order('appointment_date asc').first
     authorize! :create, Appointment
+
+    @categories = Category.all
+    @last = AppointmentsQuery.new(current_user).last_appointment
+    @nearest = AppointmentsQuery.new(current_user).nearest_appointment
   end
 end

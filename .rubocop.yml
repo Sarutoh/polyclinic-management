@@ -9,6 +9,9 @@ Metrics/MethodLength:
   Max: 25
   Exclude:
      - 'db/**/*'
+Metrics/BlockLength:
+  Exclude:
+    - 'config/**/*'
 Layout/LineLength:
   Exclude:
     - 'config/**/*'
@@ -17,3 +20,4 @@ Rails/UniqueValidationWithoutIndex:
 Metrics/AbcSize:
   Exclude:
     - 'db/**/*'
+    - 'app/helpers/application_helper.rb'

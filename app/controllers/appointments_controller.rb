@@ -1,22 +1,24 @@
 # frozen_string_literal: true
 
 class AppointmentsController < ApplicationController
-  def index
-    @finished = current_user.appointments.where('appointment_date < ? ', Time.zone.now).order('appointment_date desc')
-    @planned = current_user.appointments.where('appointment_date > ? ', Time.zone.now).order('appointment_date asc')
+  before_action :authenticate_user!
 
+  def index
     authorize! :read, Appointment
+
+    @finished = AppointmentsQuery.new(current_user).finished_appointments
+    @planned = AppointmentsQuery.new(current_user).planned_appointments
   end
 
   def show
+    authorize! :read, Appointment
+
     @appointment = Appointment.find(params[:id])
 
     respond_to do |format|
       format.html
       format.json { render json: @appointment }
     end
-
-    authorize! :read, Appointment
   end
 
   def edit
@@ -52,14 +54,10 @@ class AppointmentsController < ApplicationController
   private
 
   def create_params
-    appointment_params.except(:category_id)
+    params.require(:appointment).permit(:doctor_id, :appointment_date, :patient_id).except(:category_id)
   end
 
   def update_params
     params.require(:appointment).permit(:description, :recomendation)
-  end
-
-  def appointment_params
-    params.require(:appointment).permit(:doctor_id, :appointment_date, :patient_id)
   end
 end

@@ -27,9 +27,9 @@ module ApplicationHelper
 
   def participant(appointment)
     if current_user.doctor?
-      participant_helper('Patient', appointment)
+      safe_join([tag.div('Patient'), tag.strong(appointment.patient.full_name.to_s)])
     else
-      participant_helper('Doctor ', appointment)
+      safe_join([tag.div('Doctor'), tag.strong(appointment.doctor.full_name.to_s)])
     end
   end
 
@@ -38,10 +38,6 @@ module ApplicationHelper
   end
 
   private
-
-  def participant_helper(type, appointment)
-    safe_join([tag.div(type.to_s), tag.strong(appointment.send(type.downcase.to_sym).full_name.to_s)])
-  end
 
   def image_tag(avatar_size, url)
     tag.img src: url, class: 'rounded-pill d-block mr-1', width: avatar_size, height: avatar_size
