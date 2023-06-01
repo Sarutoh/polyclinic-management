@@ -1,10 +1,10 @@
 <% flash.each do |type, message| %>
   <% next unless %w[alert notice success].include?(type) %>
-  <div data-controller="flashes" class="position-absolute top-25 end-5 top-level">
+  <div data-controller="flashes" class="position-absolute top-25 top-level" style="right: 5% !important;">
     <div id="toast-message" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="<%= flash_class(type) %>">
         <div class="toast-body">
-          <% if message.instance_of?(String) %>
+          <% if !message.respond_to?(:key) %>
             <%= message %>
           <% elsif  message.keys[0] == 'base' %>
             <%= message['base'][0] %>

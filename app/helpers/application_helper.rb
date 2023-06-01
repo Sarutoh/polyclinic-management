@@ -5,10 +5,9 @@ DEFAULT_PROFILE_IMAGE = 'https://res.cloudinary.com/dao7yd35p/image/upload/v1665
 AVATAR_SIZE = 40
 EDIT_AVATAR_SIZE = 150
 FLASH_CLASSES = {
-  notice: 'flash-info',
-  success: 'flash-success',
-  error: 'bg-warning',
-  alert: 'flash-alert'
+  notice: 'bg-info',
+  success: 'bg-success',
+  alert: 'bg-warning'
 }.freeze
 
 module ApplicationHelper

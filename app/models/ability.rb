@@ -9,11 +9,11 @@ class Ability
     can %i[read create update], Appointment, user: user
     can :read, Doctor, user: user
 
-    return unless user.instance_of?(Doctor)
+    return unless user.doctor?
 
     can %i[read create update], Appointment, user: user
 
-    return unless user.instance_of?(AdminUser)
+    return unless user.admin?
 
     can %i[read create update], Doctor, user: user
   end
