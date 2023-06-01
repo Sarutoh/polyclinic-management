@@ -35,6 +35,7 @@ jobs:
           PGUSER: postgres
         run: |
           sudo apt-get -yqq install libpq-dev
+          yarn install
           yarn build:css
           yarn build
           bundle exec rake db:create
