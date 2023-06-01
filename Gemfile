@@ -43,6 +43,7 @@ gem 'sassc-rails'
 
 group :development do
   gem 'bullet'
+  gem 'dockerfile-rails', '>= 1.4'
   gem 'web-console'
 end
 

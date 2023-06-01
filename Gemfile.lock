@@ -116,6 +116,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.4.1)
+      rails
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.12.0)
@@ -350,6 +352,7 @@ DEPENDENCIES
   cloudinary
   cssbundling-rails
   devise
+  dockerfile-rails (>= 1.4)
   factory_bot_rails
   faker
   jbuilder
