@@ -3,7 +3,7 @@
     <%= f.hidden_field :doctor_id, value: current_user.id %>
 
     <%= f.label :appointment_date, class: 'form-label'%>
-    <%= f.datetime_field :appointment_date, min: Date.tomorrow.at_beginning_of_day, class: 'form-control', required: true %>
+    <%= f.datetime_field :appointment_date, min: Date.yesterday.at_beginning_of_day, class: 'form-control', required: true %>
 
     <%= f.label :patient_id, class: 'form-label' %>
     <%= f.select("patient_id", Patient.all.collect {|c| [ c.full_name, c.id ] }, { include_blank: true }, { class: 'form-select' } ) %>
