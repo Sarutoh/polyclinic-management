@@ -19,7 +19,7 @@
       </tr>
     </tbody>
   </table>
-  <% if current_user.doctor? && able_to_recomendate?(@appointment) %>
-    <%= link_to 'Make recomendation', edit_appointment_path(@appointment), class: 'btn btn-success', method: :get %>
+  <% if current_user.doctor? && !@appointment.closed? %>
+    <%= link_to 'Update appointment', edit_appointment_path(@appointment), class: 'btn btn-success', method: :get %>
   <% end %>  
 </div>

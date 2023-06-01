@@ -3,7 +3,7 @@
     <%= f.hidden_field :patient_id, value: current_user.id %>
 
     <%= f.label :appointment_date, class: 'form-label'%>
-    <%= f.datetime_field :appointment_date, min: Date.tomorrow.at_beginning_of_day, class: 'form-control', required: true %>
+    <%= f.datetime_field :appointment_date, min: Date.today.at_beginning_of_day, class: 'form-control', required: true %>
 
     <div data-controller="get">
       <label> Category </label>
