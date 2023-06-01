@@ -33,13 +33,13 @@ RSpec.describe 'doctor left recomendation', type: :feature do
 
     find("#wait_for_recomendation_#{appointment.id}").click
 
-    click_link 'Make recomendation'
+    click_link 'Update appointment'
 
     within("#edit_appointment_#{appointment.id}") do
       fill_in 'Recomendation', with: 'Take more vitamins and go for a walk outside!'
     end
 
-    click_button 'Make recomendation'
+    click_button 'Update appointment'
 
     expect(page).to have_content 'Take more vitamins and go for a walk outside!'
     expect(current_path).to eq(appointment_path(appointment))

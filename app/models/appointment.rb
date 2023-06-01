@@ -15,7 +15,7 @@ class Appointment < ApplicationRecord
   private
 
   def close_appointment
-    return if closed?
+    return if closed? || recomendation.empty?
 
     toggle(:closed).save
   end

@@ -3,11 +3,12 @@
     <%= f.label :description, class: 'form-label'%>
     <%= f.text_field :description, class: 'form-control' %>
 
-    <%= f.label :recomendation, class: 'form-label' %>
-    <%= f.text_field :recomendation, class: 'form-control' %>
-
+    <% if able_to_recomendate?(@appointment) %>
+      <%= f.label :recomendation, class: 'form-label'%>
+      <%= f.text_field :recomendation, class: 'form-control' %>
+    <% end %>
     <div>
-      <%= f.submit 'Make recomendation', class: "btn btn-success mt-2 me-2 float-sm-end" %>
+      <%= f.submit 'Update appointment', class: "btn btn-success mt-2 me-2 float-sm-end" %>
     </div>
   <% end %>
 </div>
