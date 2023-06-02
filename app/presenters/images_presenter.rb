@@ -2,6 +2,7 @@
 
 class ImagesPresenter < BasePresenter
   include ActionView::Helpers::TagHelper
+
   URL_PREFIX = 'https://res.cloudinary.com/dao7yd35p/image/upload'
   LOGIN_IMAGE_URL = "#{URL_PREFIX}/v1685446452/general/login_image2_aruprc.jpg".freeze
   DEFAULT_AVATAR_URL = "#{URL_PREFIX}/v1665059701/general/360_F_209370065_JLXhrc5inEmGl52SyvSPeVB23hB6IjrR_q7x5nk.jpg"
