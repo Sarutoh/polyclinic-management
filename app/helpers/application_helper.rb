@@ -4,27 +4,15 @@ LOGIN_IMAGE_URL = 'https://res.cloudinary.com/dao7yd35p/image/upload/v1685446452
 DEFAULT_PROFILE_IMAGE = 'https://res.cloudinary.com/dao7yd35p/image/upload/v1665059701/general/360_F_209370065_JLXhrc5inEmGl52SyvSPeVB23hB6IjrR_q7x5nk.jpg'
 AVATAR_SIZE = 40
 EDIT_AVATAR_SIZE = 150
-FLASH_CLASSES = {
-  notice: 'bg-info',
-  success: 'bg-success',
-  alert: 'bg-warning'
-}.freeze
 
 module ApplicationHelper
-  def flash_class(type)
-    "toast-header #{FLASH_CLASSES[type.to_sym]}"
-  end
+  def devise_error_handler(resource)
+    return unless resource.errors.any?
 
-  def add_alert(resource)
     flash.now[:alert] =
       (I18n.t('errors.messages.not_saved',
               count: resource.errors.count,
               resource: resource.class.model_name.human.downcase).capitalize + errors_ul(resource)).html_safe
-  end
-
-  def errors_ul(resource)
-    list = resource.errors.full_messages.map { |m| "<li>#{m}" }.join('</li>')
-    "<ul> #{list}</ul>"
   end
 
   def avatar
@@ -64,6 +52,11 @@ module ApplicationHelper
   end
 
   private
+
+  def errors_ul(resource)
+    list = resource.errors.full_messages.map { |m| "<li>#{m}" }.join('</li>')
+    "<ul> #{list}</ul>"
+  end
 
   def image_tag(avatar_size, url)
     tag.img src: url, class: 'rounded-pill d-block mr-1', width: avatar_size, height: avatar_size

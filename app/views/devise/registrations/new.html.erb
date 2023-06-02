@@ -9,9 +9,7 @@
           <div class="mb-4">
             <h2>Sign up</h2>
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-              <% if resource.errors.any? %>
-                <% add_alert(resource) %>
-              <% end %>
+              <% devise_error_handler(resource) %>
 
               <div class="row">
                 <div class="form-group col-md-6">

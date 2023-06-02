@@ -9,13 +9,6 @@
           <div class="mb-4">
             <h2>Log in</h2>
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <% if flash.alert %>
-                <ul>
-                  <% flash.each do |name, msg| %>
-                    <li><%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %></li>
-                  <% end %>
-                </ul>
-              <% end %>
               <div class="form-group">
                 <%= f.label :phone_number %><br />
                 <%= f.phone_field :phone_number, autofocus: true, autocomplete: "phone_number", class: "form-control" %>
