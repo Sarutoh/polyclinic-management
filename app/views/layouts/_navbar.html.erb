@@ -3,7 +3,7 @@
     <div class="px-3 d-flex flex-wrap">
       <%= link_to 'Polyclinic Managment', root_path, class: "navbar-brand fs-2 header-logo text-dark nav me-auto" %>
       <div class="dropdown d-flex">
-        <%= avatar %>
+        <%= ImagesPresenter.call(avatar: { user: current_user, type: :avatar }) %>
         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle mt-1" data-bs-toggle="dropdown" aria-expanded="false">
         </a>
           <ul class="dropdown-menu text-small shadow">

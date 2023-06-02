@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ToastPresenter < BasePresenter
+class ToastsPresenter < BasePresenter
   BASE = 'base'
   FLASH_CLASSES = {
     notice: 'bg-info',

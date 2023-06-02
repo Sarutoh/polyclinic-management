@@ -1,10 +1,10 @@
 <% flash.each do |type, message| %>
-  <% next unless ToastPresenter.call(include_flash?: type) %>
+  <% next unless ToastsPresenter.call(include_flash?: type) %>
   <div data-controller="flashes" class="position-absolute top-25 top-level" style="right: 5% !important;">
     <div id="toast-message" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="<%= ToastPresenter.call(flash_class: type) %>">
+      <div class="<%= ToastsPresenter.call(flash_class: type) %>">
         <div class="toast-body">
-          <%= ToastPresenter.call(handle_message: message) %>
+          <%= ToastsPresenter.call(handle_message: message) %>
         </div>
         <button type="button" class="btn-close flash-dismiss-button" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>

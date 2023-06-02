@@ -8,7 +8,7 @@
         <%= f.label 'Avatar', class: "fs-4 me-5" %>
       </div>
       <div class="col-3">
-        <%= edit_avatar %>
+        <%= ImagesPresenter.call(avatar: { user: current_user, type: :edit_avatar }) %>
       </div>
       <div class="col-5">
         <%= f.file_field :avatar, autofocus: true, class: "form-control"%>
