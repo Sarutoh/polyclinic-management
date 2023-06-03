@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def devise_error_handler(resource)
+  def handle_devise_errors(resource)
     return unless resource.errors.any?
 
     flash.now[:alert] =
