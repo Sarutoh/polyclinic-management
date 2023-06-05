@@ -3,6 +3,7 @@
 class ImagesPresenter < BasePresenter
   include ActionView::Helpers::TagHelper
 
+  TAG_CLASS = 'rounded-pill d-block mr-1'
   URL_PREFIX = 'https://res.cloudinary.com/dao7yd35p/image/upload'
   LOGIN_IMAGE_URL = "#{URL_PREFIX}/v1685446452/general/login_image2_aruprc.jpg".freeze
   DEFAULT_AVATAR_URL = "#{URL_PREFIX}/v1665059701/general/360_F_209370065_JLXhrc5inEmGl52SyvSPeVB23hB6IjrR_q7x5nk.jpg"
@@ -27,6 +28,6 @@ class ImagesPresenter < BasePresenter
   private
 
   def image_tag(avatar_size, url)
-    tag.img src: url, class: 'rounded-pill d-block mr-1', width: avatar_size, height: avatar_size
+    tag.img src: url, class: TAG_CLASS, width: avatar_size, height: avatar_size
   end
 end
