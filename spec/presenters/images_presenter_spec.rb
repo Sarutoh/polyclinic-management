@@ -20,7 +20,7 @@ RSpec.describe ImagesPresenter do
       end
 
       context 'when other pages' do
-        let(:type) { :edit_avatar }
+        let(:type) { :avatar }
         let(:size) { described_class::SIZES[type] }
 
         it { expect(presenter).to eq(tag) }
@@ -44,7 +44,7 @@ RSpec.describe ImagesPresenter do
       end
 
       context 'when other pages' do
-        let(:type) { :edit_avatar }
+        let(:type) { :avatar }
         let(:size) { described_class::SIZES[type] }
 
         it { expect(presenter).to eq(tag) }
