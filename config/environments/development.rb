@@ -47,4 +47,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   config.assets.quiet = true
+
+  # TODO: comment line below in case you need dev logs
+  config.logger = Logger.new(nil)
 end

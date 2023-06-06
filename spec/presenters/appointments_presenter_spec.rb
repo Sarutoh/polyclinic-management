@@ -44,7 +44,7 @@ RSpec.describe AppointmentsPresenter do
       it { expect(presenter).to eq(wait_id) }
     end
 
-    context 'when allowed to recomendate' do
+    context 'when not allowed to recomendate' do
       before do
         allow(AppointmentsPolicy)
           .to receive_message_chain(:new,

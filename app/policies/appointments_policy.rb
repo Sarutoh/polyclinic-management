@@ -11,5 +11,5 @@ class AppointmentsPolicy
 
   private
 
-  attr_reader :user, :appointment
+  attr_reader :appointment
 end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ToastsPresenter < BasePresenter
-  BASE = 'base'
   FLASH_CLASSES = {
     notice: 'bg-info',
     success: 'bg-success',
@@ -17,14 +16,12 @@ class ToastsPresenter < BasePresenter
   end
 
   def handle_message(message)
-    if !message.respond_to?(:key)
-      message
-    elsif message.keys.first == BASE
-      message[BASE].first
-    else
+    if message.respond_to?(:key)
       key = message.keys.first
 
       "#{key.capitalize} #{message[key].first}"
+    else
+      message
     end
   end
 end

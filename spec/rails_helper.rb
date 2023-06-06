@@ -9,7 +9,9 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'simplecov'
 
-SimpleCov.start
+SimpleCov.start do
+  add_filter '/spec/'
+end
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
