@@ -30,4 +30,6 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation = :raise
 
   config.active_support.disallowed_deprecation_warnings = []
+  # TODO: comment line below in case you need test logs
+  config.logger = Logger.new(nil)
 end

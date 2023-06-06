@@ -9,7 +9,7 @@ class Appointment < ApplicationRecord
   validate :validate_max_appointments, on: :create
 
   def validate_max_appointments
-    errors.add(:base, 'Too many appointments for a doctor!') if doctor.appointments.where(closed: false).count > 10
+    errors.add(:doctor, 'has too many appointments!') if doctor.appointments.where(closed: false).count > 10
   end
 
   private
