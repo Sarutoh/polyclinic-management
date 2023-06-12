@@ -7,20 +7,20 @@ RSpec.describe AppointmentsPolicy do
     context 'when able' do
       let(:appointment) { create(:appointment, appointment_date: 2.days.ago) }
 
-      it { expect(policy).to be_truthy }
+      it { is_expected.to be_truthy }
     end
 
     context 'when not able' do
       context 'when closed' do
         let(:appointment) { create(:appointment, appointment_date: 2.days.ago, closed: true) }
 
-        it { expect(policy).to be_falsey }
+        it { is_expected.to be_falsey }
       end
 
       context 'when appointment date upcoming' do
         let(:appointment) { create(:appointment, appointment_date: 2.days.from_now) }
 
-        it { expect(policy).to be_falsey }
+        it { is_expected.to be_falsey }
       end
     end
   end

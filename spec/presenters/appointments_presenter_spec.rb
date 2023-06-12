@@ -2,7 +2,7 @@
 
 RSpec.describe AppointmentsPresenter do
   context '#participant' do
-    subject(:presenter) { described_class }
+    subject(:presenter) { described_class.call(participant: params) }
 
     let!(:appointment) { create(:appointment) }
     let(:tag) { "<div>#{opposite_class_name}</div><strong>#{opposite_user.full_name}</strong>" }
@@ -13,7 +13,7 @@ RSpec.describe AppointmentsPresenter do
       let(:opposite_user) { appointment.patient }
       let(:user) { appointment.doctor }
 
-      it { expect(presenter.call(participant: params)).to eq(tag) }
+      it { is_expected.to eq(tag) }
     end
 
     context 'when patient' do
@@ -21,7 +21,7 @@ RSpec.describe AppointmentsPresenter do
       let(:opposite_user) { appointment.doctor }
       let(:user) { appointment.patient }
 
-      it { expect(presenter.call(participant: params)).to eq(tag) }
+      it { is_expected.to eq(tag) }
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe AppointmentsPresenter do
             .with(no_args) { true }
       end
 
-      it { expect(presenter).to eq(wait_id) }
+      it { is_expected.to eq(wait_id) }
     end
 
     context 'when not allowed to recomendate' do
@@ -53,7 +53,7 @@ RSpec.describe AppointmentsPresenter do
             .with(no_args) { false }
       end
 
-      it { expect(presenter).to eq(info_block_id) }
+      it { is_expected.to eq(info_block_id) }
     end
   end
 end

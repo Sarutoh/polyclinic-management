@@ -9,17 +9,17 @@ RSpec.describe ToastsPresenter do
     context 'when notice' do
       let(:type) { 'notice' }
 
-      it { expect(presenter).to eq(expected_result) }
+      it { is_expected.to eq(expected_result) }
     end
     context 'when success' do
       let(:type) { 'success' }
 
-      it { expect(presenter).to eq(expected_result) }
+      it { is_expected.to eq(expected_result) }
     end
     context 'when alert' do
       let(:type) { 'alert' }
 
-      it { expect(presenter).to eq(expected_result) }
+      it { is_expected.to eq(expected_result) }
     end
   end
 
@@ -29,13 +29,13 @@ RSpec.describe ToastsPresenter do
     context 'when included' do
       let(:type) { 'alert' }
 
-      it { expect(presenter).to be_truthy }
+      it { is_expected.to be_truthy }
     end
 
     context 'when not included' do
       let(:type) { 'error' }
 
-      it { expect(presenter).to be_falsey }
+      it { is_expected.to be_falsey }
     end
   end
 
@@ -45,14 +45,14 @@ RSpec.describe ToastsPresenter do
     context 'when message string' do
       let(:message) { 'Alert message' }
 
-      it { expect(presenter).to eq(message) }
+      it { is_expected.to eq(message) }
     end
 
     context 'when message model error' do
       let(:text) { 'has too many appointments!' }
       let(:message) { { 'doctor' => [text] } }
 
-      it { expect(presenter).to eq('Doctor has too many appointments!') }
+      it { is_expected.to eq('Doctor has too many appointments!') }
     end
   end
 end

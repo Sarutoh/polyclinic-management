@@ -16,14 +16,14 @@ RSpec.describe ImagesPresenter do
         let(:type) { :edit_avatar }
         let(:size) { described_class::SIZES[type] }
 
-        it { expect(presenter).to eq(tag) }
+        it { is_expected.to eq(tag) }
       end
 
       context 'when other pages' do
         let(:type) { :avatar }
         let(:size) { described_class::SIZES[type] }
 
-        it { expect(presenter).to eq(tag) }
+        it { is_expected.to eq(tag) }
       end
     end
 
@@ -40,14 +40,14 @@ RSpec.describe ImagesPresenter do
         let(:type) { :edit_avatar }
         let(:size) { described_class::SIZES[type] }
 
-        it { expect(presenter).to eq(tag) }
+        it { is_expected.to eq(tag) }
       end
 
       context 'when other pages' do
         let(:type) { :avatar }
         let(:size) { described_class::SIZES[type] }
 
-        it { expect(presenter).to eq(tag) }
+        it { is_expected.to eq(tag) }
       end
     end
   end
