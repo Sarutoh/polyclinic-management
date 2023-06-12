@@ -7,22 +7,9 @@ RSpec.describe 'doctor left recomendation', type: :feature do
   let!(:appointment) { create(:appointment, doctor: doctor, appointment_date: 2.days.ago) }
   let(:recomendation) { 'Take more vitamins and go for a walk outside!' }
 
-  before do
-    visit '/'
-
-    within('#new_user') do
-      fill_in 'Phone number', with: phone_number
-      fill_in 'Password', with: password
-    end
-
-    click_button 'Log in'
-  end
-
-  it 'signs me in' do
-    expect(page).to have_content 'You can make appointment right here'
-  end
-
   it 'make recomendation' do
+    login_user(phone_number, password)
+
     visit 'appointments'
 
     find("#wait_for_recomendation_#{appointment.id}").click

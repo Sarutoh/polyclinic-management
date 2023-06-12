@@ -6,18 +6,9 @@ RSpec.describe 'doctor create appointment', type: :feature do
   let!(:doctor) { create(:doctor, password: password, phone_number: phone_number) }
   let!(:patient) { create(:patient) }
 
-  before do
-    visit '/'
-
-    within('#new_user') do
-      fill_in 'Phone number', with: phone_number
-      fill_in 'Password', with: password
-    end
-
-    click_button 'Log in'
-  end
-
   it 'create appointment' do
+    login_user(phone_number, password)
+
     within('#new_appointment') do
       fill_in 'Appointment date', with: Time.zone.now
       select patient.full_name.to_s, from: 'appointment_patient_id'
