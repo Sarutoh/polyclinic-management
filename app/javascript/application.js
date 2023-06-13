@@ -3,5 +3,12 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
 
-const toastElList = document.querySelectorAll('.toast')
+import "./src/jquery"
+import "./src/jquery-ui"
+
+const toastElList = $('.toast')
 const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl))
+
+$(function() {
+    $("#selectable").selectable();
+});

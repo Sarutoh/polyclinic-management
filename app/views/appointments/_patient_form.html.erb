@@ -3,6 +3,16 @@
     <%= f.hidden_field :patient_id, value: current_user.id %>
 
     <%= f.label :appointment_date, class: 'form-label'%>
+    <%# TODO: change it after slots implementation %>
+    <ol id="selectable" class="list-group">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+      <li>Item 4</li>
+      <li>Item 5</li>
+      <li>Item 6</li>
+      <li>Item 7</li>
+    </ol>
     <%= f.datetime_field :appointment_date, min: Date.today.at_beginning_of_day, class: 'form-control', required: true %>
 
     <div data-controller="get">

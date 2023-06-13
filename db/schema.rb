@@ -71,12 +71,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_160310) do
   create_table "appointments", force: :cascade do |t|
     t.text "description"
     t.text "recomendation"
-    t.datetime "appointment_date", null: false
     t.boolean "closed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "doctor_id"
     t.bigint "patient_id"
+    t.bigint "doctor_id"
+    t.datetime "appointment_date"
     t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
   end
