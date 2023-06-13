@@ -2,29 +2,21 @@
   <%= form_for Appointment.new do |f| %>
     <%= f.hidden_field :patient_id, value: current_user.id %>
 
-    <%= f.label :appointment_date, class: 'form-label'%>
-    <%# TODO: change it after slots implementation %>
-    <ol id="selectable" class="list-group">
-      <li>Item 1</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-      <li>Item 4</li>
-      <li>Item 5</li>
-      <li>Item 6</li>
-      <li>Item 7</li>
-    </ol>
-    <%= f.datetime_field :appointment_date, min: Date.today.at_beginning_of_day, class: 'form-control', required: true %>
-
     <div data-controller="get">
       <label> Category </label>
       <%= select("category", "category_id", @categories.collect {|c| [ c.name, c.id ] }, { include_blank: true }, { class: 'form-select', data: { action: "change->get#category_doctors" }} ) %>
 
       <%= f.label :doctor_id, class: 'form-label' %>
-      <%= f.select :doctor_id, [], {}, { class: 'form-control', required: true } %>
+      <%= f.select :doctor_id, [], {}, { class: 'form-control', required: true, data: { action: "change->get#doctorSlot" }} %>
     </div>
 
-    <div>
-      <%= f.submit 'Make appointment', class: "btn btn-success mt-2 me-2 float-sm-end" %>
+    <%= f.label :appointment_date, class: 'form-label'%>
+    <div data-controller="selectableLi"> 
+      <ul id="selectable" class="list-group" data-action="click->selectableLi#setAppoinmentDate">
+      </ul>
     </div>
+    <%= f.hidden_field :appointment_date, required: true %>
+
+    <%= f.submit 'Make appointment', class: "btn btn-success mt-2 me-2 float-sm-end" %>
   <% end %>
 </div>

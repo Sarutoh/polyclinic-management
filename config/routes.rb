@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :doctors, only: %w[index show] do
     collection do
       get :list
+      get :slots
     end
   end
 

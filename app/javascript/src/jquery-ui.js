@@ -1032,7 +1032,8 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 		this.refresh = function() {
 			that.elementPos = $( that.element[ 0 ] ).offset();
 			that.selectees = $( that.options.filter, that.element[ 0 ] );
-			that._addClass( that.selectees, "list-group-item" );
+			// commented it and add manualy
+			// that._addClass( that.selectees, "list-group-item" );
 			that.selectees.each( function() {
 				var $this = $( this ),
 					selecteeOffset = $this.offset(),

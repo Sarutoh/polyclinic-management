@@ -9,4 +9,13 @@ export default class extends Controller {
       responseKind: 'turbo-stream'
     })
   }
+
+  doctorSlot (event) {
+    let doctorId = event.target.selectedOptions[0].value
+    console.log(doctorId)
+
+    get(`/doctors/slots?doctor_id=${doctorId}`, {
+      responseKind: 'turbo-stream'
+    })
+  }
 }
