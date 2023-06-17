@@ -7,7 +7,7 @@
       <%= select("category", "category_id", @categories.collect {|c| [ c.name, c.id ] }, { include_blank: true }, { class: 'form-select', data: { action: "change->get#categoryDoctors" }} ) %>
 
       <%= f.label :doctor_id, class: 'form-label' %>
-      <%= f.select :doctor_id, [], {}, { class: 'form-control', required: true, data: { action: "change->get#doctorSlot" }} %>
+      <%= f.select :doctor_id, [], {}, { class: 'form-control', required: true, data: { action: "change->get#doctorSlots" }} %>
     </div>
 
     <%= f.label :appointment_date, class: 'form-label'%>
