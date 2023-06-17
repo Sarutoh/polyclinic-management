@@ -1,6 +1,6 @@
 <%= turbo_stream.update target="selectable" do %>
   <% @slots.each do |slot| %>
-    <li class='list-group-item'>
+    <li class="list-group-item" data-action="click->list#setSlot">
       <%= (Time.now.beginning_of_day() + slot.hours).to_formatted_s(:db) %>
     </li>
   <% end %>

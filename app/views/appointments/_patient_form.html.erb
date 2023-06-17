@@ -11,10 +11,9 @@
     </div>
 
     <%= f.label :appointment_date, class: 'form-label'%>
-    <div data-controller="selectableLi"> 
-      <ul id="selectable" class="list-group" data-action="click->selectableLi#setAppoinmentDate">
-      </ul>
-    </div>
+    <ul id="selectable" class="list-group" data-controller="list">
+    </ul>
+
     <%= f.hidden_field :appointment_date, required: true %>
 
     <%= f.submit 'Make appointment', class: "btn btn-success mt-2 me-2 float-sm-end" %>
