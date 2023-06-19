@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DoctorsController < ApplicationController
+class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def list
@@ -12,8 +12,10 @@ class DoctorsController < ApplicationController
   end
 
   def slots
-    # Slot logic call here
-    # @slots = Doctor.find(params[:doctorId]).slots[Time.now.strftime('%A').downcase.to_sym]
+    # TODO: call service that handle users slots for patient and doctor
+    # @patient = Patient.find(params[:patientID])
+    # @doctor = Doctor.find(params[:DoctorID])
+
     before = [10, 11, 12, 13]
     after = [14, 15, 16, 17]
     @slots = (before.sample..after.sample)

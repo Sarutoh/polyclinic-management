@@ -4,30 +4,21 @@ import { get } from "@rails/request.js"
 const turboStream = 'turbo-stream'
 const slotRoute = 'slots'
 const listRoute = 'list'
-const doctorsController = 'doctors'
-const patientsController = 'patients'
 
 export default class extends Controller {
   categoryDoctors(event) {
     let categoryId = this.getId(event)
-    let route = `/${doctorsController}/${listRoute}`
+    let route = listRoute
     let params = { categoryId: categoryId }
   
     get(this.getPath(route, params), { responseKind: turboStream })
   }
 
-  doctorSlots(event) {
+  userSlots(event) {
     let doctorId = this.getId(event)
-    let route = `/${doctorsController}/${slotRoute}`
+    // let patientId = this.getId(event)
+    let route = slotRoute
     let params = { doctorId: doctorId }
-
-    get(this.getPath(route, params), { responseKind: turboStream })
-  }
-
-  patientSlots(event) {
-    let patientId = this.getId(event)
-    let route = `/${patientsController}/${slotRoute}`
-    let params = { patientId: patientId }
 
     get(this.getPath(route, params), { responseKind: turboStream })
   }
@@ -39,6 +30,6 @@ export default class extends Controller {
   getPath(route, params) {
     let name = Object.keys(params)[0]
 
-    return `${route}?${name}=${params[name]}`
+    return `/users/${route}?${name}=${params[name]}`
   }
 }
