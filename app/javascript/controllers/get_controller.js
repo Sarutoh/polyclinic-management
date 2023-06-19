@@ -2,22 +2,34 @@ import { Controller } from "@hotwired/stimulus"
 import { get } from "@rails/request.js"
 
 const turboStream = 'turbo-stream'
+const slotRoute = 'slots'
+const listRoute = 'list'
+const doctorsController = 'doctors'
+const patientsController = 'patients'
 
 export default class extends Controller {
-  categoryDoctors (event) {
+  categoryDoctors(event) {
     let categoryId = this.getId(event)
-    let route = 'list'
+    let route = `/${doctorsController}/${listRoute}`
     let params = { categoryId: categoryId }
   
-    get(this.getPath(route, params), { responseKind: turboStream})
+    get(this.getPath(route, params), { responseKind: turboStream })
   }
 
-  doctorSlots (event) {
+  doctorSlots(event) {
     let doctorId = this.getId(event)
-    let route = 'slots'
+    let route = `/${doctorsController}/${slotRoute}`
     let params = { doctorId: doctorId }
 
-    get(this.getPath(route, params), { responseKind: turboStream})
+    get(this.getPath(route, params), { responseKind: turboStream })
+  }
+
+  patientSlots(event) {
+    let patientId = this.getId(event)
+    let route = `/${patientsController}/${slotRoute}`
+    let params = { patientId: patientId }
+
+    get(this.getPath(route, params), { responseKind: turboStream })
   }
 
   getId(event) {
@@ -27,6 +39,6 @@ export default class extends Controller {
   getPath(route, params) {
     let name = Object.keys(params)[0]
 
-    return `/doctors/${route}?${name}=${params[name]}`
+    return `${route}?${name}=${params[name]}`
   }
 }

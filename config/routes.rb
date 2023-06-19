@@ -16,6 +16,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :patients, only: %w[index show] do
+    collection do
+      get :slots
+    end
+  end
+
   resource :profile, only: :show
 
   resources :appointments

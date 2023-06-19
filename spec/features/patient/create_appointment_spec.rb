@@ -26,5 +26,6 @@ RSpec.describe 'patient create appointment', type: :feature, js: true do
 
     expect { click_button('Make appointment') }.to change { Appointment.count }.by(1)
     expect(page).to have_content(appointment_date)
+    expect(page).to have_current_path(appointment_path(Appointment.last))
   end
 end
