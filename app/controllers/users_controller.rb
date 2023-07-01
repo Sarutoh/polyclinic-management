@@ -14,10 +14,8 @@ class UsersController < ApplicationController
   def slots
     @patient = Patient.find(params[:patientId])
     @doctor  = Doctor.find(params[:doctorId])
-    
-    binding.pry
-    
-    @slots   = Users::SlotsHandler.call(@patient, @doctor)
+
+    @slots = Users::SlotsHandler.call(@patient, @doctor)
 
     respond_to do |format|
       format.turbo_stream

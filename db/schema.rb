@@ -74,9 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_141055) do
     t.boolean "closed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "patient_id"
     t.bigint "doctor_id"
-    t.datetime "appointment_date"
+    t.bigint "patient_id"
     t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
   end
@@ -86,6 +85,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_141055) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_categories_on_name"
+  end
+
+  create_table "time_slots", force: :cascade do |t|
+    t.datetime "appointment_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "appointment_id"
+    t.index ["appointment_id"], name: "index_time_slots_on_appointment_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,7 +108,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_141055) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id"
-    t.jsonb "time_slots"
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

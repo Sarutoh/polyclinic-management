@@ -2,9 +2,10 @@
 
 module Users
   class SlotsHandler < BaseService
-    def initialize(patient, doctor)
+    def initialize(patient, doctor, date)
       @patient = patient
       @doctor = doctor
+      @date = date
     end
 
     def call
@@ -12,19 +13,11 @@ module Users
     end
 
     def available_slots
-      result = { 'this_week' => {}, 'next_week' => {} }
-      
-      patient.time_slots.each do |week, days|
-        days.each do |day, slots|
-          result[week][day] = doctor.time_slots[week][day] & slots
-        end
-      end
-
-      result
+      patient.time_slots
     end
 
     private
 
-    attr_reader :patient, :doctor
+    attr_reader :patient, :doctor, :date
   end
 end
