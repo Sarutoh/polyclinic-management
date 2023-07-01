@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  after_create :populate_slots
+  store_accessor :time_slots, :this_week, :next_week
+
   EMAIL_LENGTH = {
     min: 10,
     max: 16
@@ -31,6 +34,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def populate_slots
+    Users::SlotsPopulator.new(self).populate
+  end
 
   def email_required?
     false

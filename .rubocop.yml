@@ -25,3 +25,5 @@ Rails/FilePath:
     - 'spec/rails_helper.rb'
 Rails/I18nLocaleTexts:
   Enabled: false
+Lint/MissingSuper:
+  Enabled: false

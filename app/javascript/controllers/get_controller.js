@@ -7,29 +7,34 @@ const listRoute = 'list'
 
 export default class extends Controller {
   categoryDoctors(event) {
-    let categoryId = this.getId(event)
+    let categoryId = event.target.selectedOptions[0].value
     let route = listRoute
     let params = { categoryId: categoryId }
   
     get(this.getPath(route, params), { responseKind: turboStream })
   }
 
-  userSlots(event) {
-    let doctorId = this.getId(event)
-    // let patientId = this.getId(event)
+  userSlots() {
+    let doctorId = $('#appointment_doctor_id').val()
+    let patientId = $('#appointment_patient_id').val()
+
     let route = slotRoute
-    let params = { doctorId: doctorId }
+    let params = { doctorId: doctorId, patientId: patientId }
 
     get(this.getPath(route, params), { responseKind: turboStream })
   }
 
-  getId(event) {
-    return event.target.selectedOptions[0].value
+  getPath(route, params) {
+    return `/users/${route}?${this.paramsHandler(params)}`
   }
 
-  getPath(route, params) {
-    let name = Object.keys(params)[0]
+  paramsHandler(params) {
+    var resultParams = ''
 
-    return `/users/${route}?${name}=${params[name]}`
+    for (let key in params) {
+      resultParams += `${key}=${params[key]}&`
+    }
+    
+    return resultParams.slice(0, -1)
   }
 }

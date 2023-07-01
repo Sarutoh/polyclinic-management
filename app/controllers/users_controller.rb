@@ -12,13 +12,12 @@ class UsersController < ApplicationController
   end
 
   def slots
-    # TODO: call service that handle users slots for patient and doctor
-    # @patient = Patient.find(params[:patientID])
-    # @doctor = Doctor.find(params[:DoctorID])
-
-    before = [10, 11, 12, 13]
-    after = [14, 15, 16, 17]
-    @slots = (before.sample..after.sample)
+    @patient = Patient.find(params[:patientId])
+    @doctor  = Doctor.find(params[:doctorId])
+    
+    binding.pry
+    
+    @slots   = Users::SlotsHandler.call(@patient, @doctor)
 
     respond_to do |format|
       format.turbo_stream
