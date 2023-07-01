@@ -2,14 +2,16 @@
   <%= form_for (@resource = Appointment.new) do |f| %>
     <%= f.hidden_field :doctor_id, value: current_user.id %>
     <div data-controller='get'>
+      <label for="appointment_date">Choose a time for your appointment:</label>
+      <input type="text" id="appointment_date">
+
+      <ul id="selectable" class="list-group" data-controller="list">
+      </ul>
+
       <%= f.label :patient_id, class: 'form-label' %>
       <%= f.select("patient_id", Patient.all.collect {|c| [ c.full_name, c.id ] }, { include_blank: true }, { class: 'form-select', data: { action: "change->get#userSlots" }} ) %>
       <%= f.label :appointment_date, class: 'form-label'%>
     <div>
-
-    <ul id="selectable" class="list-group" data-controller="list">
-    </ul>
-    <%= f.hidden_field :appointment_date, required: true %>
 
     <div>
       <%= f.submit 'Make appointment', class: "btn btn-success mt-2 me-2 float-sm-end" %>

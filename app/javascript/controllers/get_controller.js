@@ -17,9 +17,10 @@ export default class extends Controller {
   userSlots() {
     let doctorId = $('#appointment_doctor_id').val()
     let patientId = $('#appointment_patient_id').val()
+    let date = $('#appointment_date').val()
 
     let route = slotRoute
-    let params = { doctorId: doctorId, patientId: patientId }
+    let params = { doctorId: doctorId, patientId: patientId, date: date }
 
     get(this.getPath(route, params), { responseKind: turboStream })
   }

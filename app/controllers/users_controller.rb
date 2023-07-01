@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @patient = Patient.find(params[:patientId])
     @doctor  = Doctor.find(params[:doctorId])
 
-    @slots = Users::SlotsHandler.call(@patient, @doctor)
+    @slots = Users::SlotsHandler.call(@patient, @doctor, params[:date])
 
     respond_to do |format|
       format.turbo_stream

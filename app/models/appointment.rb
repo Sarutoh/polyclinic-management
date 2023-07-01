@@ -14,7 +14,7 @@ class Appointment < ApplicationRecord
   end
 
   def starts_at
-    time_slot.appointment_date.strftime('%I:%M')
+    time_slot.appointment_date.strftime('%H:%M')
   end
 
   private

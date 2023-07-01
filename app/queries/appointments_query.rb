@@ -26,11 +26,11 @@ class AppointmentsQuery
   attr_reader :user
 
   def subquery_past
-    user.appointments.where('appointment_date < ? ', Time.zone.now).order('appointment_date desc')
+    user.appointments.joins(:time_slot).where('appointment_date < ? ', Time.zone.now).order('appointment_date desc')
   end
 
   def subquery_future
-    user.appointments.where('appointment_date > ? ', Time.zone.now).order('appointment_date asc')
+    user.appointments.joins(:time_slot).where('appointment_date > ? ', Time.zone.now).order('appointment_date asc')
   end
 
   def set_includes
