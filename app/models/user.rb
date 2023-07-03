@@ -32,10 +32,6 @@ class User < ApplicationRecord
 
   private
 
-  def populate_slots
-    Users::SlotsPopulator.new(self).populate
-  end
-
   def email_required?
     false
   end

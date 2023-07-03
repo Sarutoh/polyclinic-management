@@ -4,9 +4,9 @@
     <%= f.hidden_field :time_slot %>
 
     <label for="appointment_date">Choose a time for your appointment:</label>
-    <input type="text" id="appointment_date" value=<%= "#{Date.today.strftime("%d/%m/%y")}"%>>
+    <input class="form-control" type="text" id="appointment_date" value=<%= "#{Date.today.strftime("%d/%m/%y")}"%>>
 
-    <ul id="selectable" class="list-group" data-controller="list">
+    <ul id="selectable" class="list-group list-group-horizontal flex-wrap d-flex my-2" data-controller="list">
     </ul>
 
     <div data-controller="get">
