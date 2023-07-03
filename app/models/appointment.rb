@@ -13,10 +13,6 @@ class Appointment < ApplicationRecord
     errors.add(:doctor, 'has too many appointments!') if doctor.appointments.where(closed: false).count >= 10
   end
 
-  def starts_at
-    time_slot.appointment_date.strftime('%H:%M')
-  end
-
   private
 
   def close_appointment

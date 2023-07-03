@@ -24,7 +24,7 @@ RSpec.describe 'doctor create appointment', type: :feature, js: true do
   end
 
   context 'when not create appointment' do
-    before { create_list(:appointment, 10, doctor: doctor) }
+    before { create_list(:appointment, 10, doctor: doctor, time_slot: create(:time_slot)) }
 
     it 'show error' do
       expect { click_button('Make appointment') }.not_to(change { Appointment.count })

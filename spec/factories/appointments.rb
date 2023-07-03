@@ -5,8 +5,9 @@ FactoryBot.define do
     doctor { create(:doctor) }
     patient { create(:patient) }
     association :time_slot
-    # after(:create) do |appointment|
-    #   appointment.time_slot = create(:time_slot, appointment: appointment)
-    # end
+
+    trait :closed do
+      closed { true }
+    end
   end
 end

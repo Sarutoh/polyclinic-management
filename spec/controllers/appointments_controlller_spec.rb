@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe AppointmentsController, type: :controller do
-  describe 'controller test case ' do
+  describe 'controller test case' do
     let(:doctor) { create(:doctor) }
     let(:patient) { create(:patient) }
 
@@ -13,7 +13,7 @@ RSpec.describe AppointmentsController, type: :controller do
           appointment: {
             doctor_id: doctor.id,
             patient_id: patient.id,
-            appointment_date: 2.days.from_now
+            time_slot: '05/07/2023 12:00'
           }
         }
 
