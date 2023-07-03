@@ -1,0 +1,5 @@
+<% @slots.each do |slot| %>
+  <li class="list-group-item rounded" data-action="click->list#setSlot">
+    <small><%= slot %></small>
+  </li>
+<% end %>

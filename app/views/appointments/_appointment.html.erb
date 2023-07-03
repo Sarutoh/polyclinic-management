@@ -4,7 +4,7 @@
       <%= AppointmentsPresenter.call(participant: { user: current_user, appointment: appointment }) %>
     </div>
     <div>
-      Appointment date <strong><%= appointment.appointment_date.to_fs(:long_ordinal) %></strong>
+      Appointment date <strong><%= appointment.time_slot.appointment_date.to_fs(:long_ordinal) %></strong>
     </div>
     <div> Click to see more info </div>
   <% end %>

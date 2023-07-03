@@ -7,7 +7,7 @@
       </tr>
       <tr>
         <th scope="row">Appointment date</th>
-        <td><strong><%= @appointment.appointment_date.to_fs(:long_ordinal) %></strong></td>
+        <td><strong><%= @appointment.time_slot.appointment_date.to_fs(:long_ordinal) %></strong></td>
       </tr>
       <tr>
         <th scope="row"><%= current_user.doctor? ? 'Patient' : 'Doctor'%></th>

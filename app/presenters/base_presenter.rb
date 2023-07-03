@@ -13,8 +13,8 @@ class BasePresenter
     result
   end
 
-  def self.call(*args, **kvargs)
-    new(*args, **kvargs).call
+  def self.call(*args, **kwargs)
+    new(*args, **kwargs).call
   end
 
   private

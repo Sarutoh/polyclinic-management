@@ -4,6 +4,10 @@ FactoryBot.define do
   factory :appointment do
     doctor { create(:doctor) }
     patient { create(:patient) }
-    appointment_date { 2.days.from_now }
+    association :time_slot
+
+    trait :closed do
+      closed { true }
+    end
   end
 end

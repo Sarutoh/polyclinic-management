@@ -6,7 +6,7 @@ class AppointmentsPolicy
   end
 
   def able_to_recomendate?
-    appointment.appointment_date.past? && !appointment.closed
+    appointment.time_slot.appointment_date.past? && !appointment.closed
   end
 
   private

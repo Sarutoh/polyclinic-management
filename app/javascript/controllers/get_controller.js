@@ -1,12 +1,41 @@
 import { Controller } from "@hotwired/stimulus"
 import { get } from "@rails/request.js"
 
+const turboStream = 'turbo-stream'
+const slotRoute = 'slots'
+const listRoute = 'list'
+
 export default class extends Controller {
-  category_doctors (event) {
-    let category_id = event.target.selectedOptions[0].value
+  categoryDoctors(event) {
+    let categoryId = event.target.selectedOptions[0].value
+    let route = listRoute
+    let params = { categoryId: categoryId }
   
-    get(`/doctors/list?category_id=${category_id}`, {
-      responseKind: 'turbo-stream'
-    })
+    get(this.getPath(route, params), { responseKind: turboStream })
+  }
+
+  userSlots() {
+    let doctorId = $('#appointment_doctor_id').val()
+    let patientId = $('#appointment_patient_id').val()
+    let date = $('#appointment_date').val()
+
+    let route = slotRoute
+    let params = { doctorId: doctorId, patientId: patientId, date: date }
+
+    get(this.getPath(route, params), { responseKind: turboStream })
+  }
+
+  getPath(route, params) {
+    return `/users/${route}?${this.paramsHandler(params)}`
+  }
+
+  paramsHandler(params) {
+    var resultParams = ''
+
+    for (let key in params) {
+      resultParams += `${key}=${params[key]}&`
+    }
+    
+    return resultParams.slice(0, -1)
   }
 }

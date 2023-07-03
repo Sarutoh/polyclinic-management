@@ -30,7 +30,14 @@ class AppointmentsController < ApplicationController
   def create
     authorize! :create, Appointment
 
-    @appointment = Appointment.new(create_params)
+    appointment_date = DateTime.parse(params[:appointment][:time_slot])
+
+    ActiveRecord::Base.transaction do
+      time_slot = TimeSlot.create(appointment_date: appointment_date)
+
+      @appointment = Appointment.new(create_params)
+      @appointment.time_slot = time_slot
+    end
 
     respond_to do |format|
       if @appointment.save
@@ -62,7 +69,7 @@ class AppointmentsController < ApplicationController
   private
 
   def create_params
-    params.require(:appointment).permit(:doctor_id, :appointment_date, :patient_id).except(:category_id)
+    params.require(:appointment).permit(:doctor_id, :appointment_date, :patient_id).except(:category_id, :time_slot)
   end
 
   def update_params

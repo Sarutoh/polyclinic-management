@@ -5,20 +5,20 @@ RSpec.describe AppointmentsPolicy do
 
   context '#able_to_recomendate?' do
     context 'when able' do
-      let(:appointment) { create(:appointment, appointment_date: 2.days.ago) }
+      let(:appointment) { create(:appointment, time_slot: create(:time_slot, appointment_date: 2.days.ago)) }
 
       it { is_expected.to be_truthy }
     end
 
     context 'when not able' do
       context 'when closed' do
-        let(:appointment) { create(:appointment, appointment_date: 2.days.ago, closed: true) }
+        let(:appointment) { create(:appointment, :closed, time_slot: create(:time_slot, appointment_date: 2.days.ago)) }
 
         it { is_expected.to be_falsey }
       end
 
       context 'when appointment date upcoming' do
-        let(:appointment) { create(:appointment, appointment_date: 2.days.from_now) }
+        let(:appointment) { create(:appointment, time_slot: create(:time_slot, appointment_date: 2.days.from_now)) }
 
         it { is_expected.to be_falsey }
       end

@@ -4,8 +4,11 @@
 
 import { application } from "./application"
 
+import FlashesController from "./flashes_controller"
+application.register("flashes", FlashesController)
+
 import GetController from "./get_controller"
 application.register("get", GetController)
 
-import FlashesController from "./flashes_controller"
-application.register("flashes", FlashesController)
+import ListController from "./list_controller"
+application.register("list", ListController)
