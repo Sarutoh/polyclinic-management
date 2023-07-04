@@ -21,6 +21,7 @@ export default class extends Controller {
 
     let route = slotRoute
     let params = { doctorId: doctorId, patientId: patientId, date: date }
+    console.log(doctorId, patientId, date)
 
     get(this.getPath(route, params), { responseKind: turboStream })
   }
