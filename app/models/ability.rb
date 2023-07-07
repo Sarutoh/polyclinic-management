@@ -6,15 +6,14 @@ class Ability
   def initialize(user)
     return if user.blank?
 
-    can %i[read create update], Appointment, user: user
-    can :read, Doctor, user: user
-
-    return unless user.doctor?
-
-    can %i[read create update], Appointment, user: user
-
-    return unless user.admin?
-
-    can %i[read create update], Doctor, user: user
+    if user.admin?
+      can :manage, :all
+    elsif user.doctor?
+      can %i[read create update], Appointment
+      can :read, Patient
+    elsif user.patient?
+      can %i[read create], Appointment
+      can :read, Doctor
+    end
   end
 end
