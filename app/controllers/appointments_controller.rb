@@ -30,17 +30,18 @@ class AppointmentsController < ApplicationController
   def create
     authorize! :create, Appointment
 
-    appointment_date = DateTime.parse(params[:appointment][:time_slot])
+    @appointment = Appointment.new(create_params)
 
-    ActiveRecord::Base.transaction do
+    if params[:appointment][:time_slot].present?
+      appointment_date = DateTime.parse(params[:appointment][:time_slot])
       time_slot = TimeSlot.create(appointment_date: appointment_date)
-
-      @appointment = Appointment.new(create_params)
       @appointment.time_slot = time_slot
+    else
+      @appointment.errors.add(:slot, 'cannot be nil. Please choose one.')
     end
 
     respond_to do |format|
-      if @appointment.save
+      if @appointment.errors.empty? && @appointment.save
         format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
         format.json { render :show, status: :created, location: @appointment }
       else
@@ -60,7 +61,7 @@ class AppointmentsController < ApplicationController
         format.html { redirect_to appointment_path(@appointment), notice: 'Appointment was successfully updated.' }
         format.json { render :show, status: :ok, location: @appointment }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_appointment_path(@appointment), alert: @appointment.errors }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end

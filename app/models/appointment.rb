@@ -8,6 +8,7 @@ class Appointment < ApplicationRecord
   has_one :time_slot, dependent: :destroy
 
   validate :validate_max_appointments, on: :create
+  validates :recomendation, length: { minimum: 10, maximum: 255 }, on: :update
 
   def validate_max_appointments
     errors.add(:doctor, 'has too many appointments!') if doctor.appointments.where(closed: false).count >= 10

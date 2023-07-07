@@ -23,7 +23,7 @@ RSpec.describe 'doctor left recomendation', type: :feature do
     end
 
     expect { click_button('Update appointment') }.to change { appointment.reload.recomendation }
-      .from(nil).to(recomendation)
+      .from('').to(recomendation)
 
     expect(page).to have_content(recomendation)
     expect(page).to have_current_path(appointment_path(appointment))

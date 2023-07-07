@@ -1,15 +1,15 @@
 <div class='container mt-2'>
   <%= form_for Appointment.new do |f| %>
     <%= f.hidden_field :patient_id, value: current_user.id %>
-    <%= f.hidden_field :time_slot %>
-
-    <label for="appointment_date">Choose a time for your appointment:</label>
-    <input class="form-control" type="text" id="appointment_date" value=<%= "#{Date.today.strftime("%d/%m/%y")}"%>>
-
-    <ul id="selectable" class="list-group list-group-horizontal flex-wrap d-flex my-2" data-controller="list">
-    </ul>
+    <%= f.hidden_field :time_slot, required: true %>
 
     <div data-controller="get">
+      <label for="appointment_date">Choose a time for your appointment:</label>
+      <input class="form-control" type="text" id="appointment_date" value=<%= "#{Date.today.strftime("%d/%m/%y")}"%>>
+
+      <ul id="selectable" class="list-group list-group-horizontal flex-wrap d-flex my-2" data-controller="list">
+      </ul>
+
       <label> Category </label>
       <%= select("category", "category_id", @categories.collect {|c| [ c.name, c.id ] }, { include_blank: true }, { class: 'form-select', data: { action: "change->get#categoryDoctors" }} ) %>
 
