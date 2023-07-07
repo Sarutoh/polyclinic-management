@@ -51,10 +51,9 @@ RSpec.describe AppointmentsController, type: :controller do
       subject(:update_request) do
         put :update, params: { id: appointment.id, appointment: {
           description: 'Stomach pain',
-          recomendation: 'Use a pill'
+          recomendation: recomendation
         } }
       end
-      let(:notice_message) { 'Appointment was successfully updated.' }
       let(:appointment) do
         create(:appointment, description: 'Back pain', doctor: doctor, time_slot: create(:time_slot, :passed))
       end
@@ -62,6 +61,9 @@ RSpec.describe AppointmentsController, type: :controller do
       before { sign_in doctor }
 
       context 'when valid params' do
+        let(:notice_message) { 'Appointment was successfully updated.' }
+        let(:recomendation) { 'Use a pill' }
+
         it 'updates appointment' do
           expect { update_request }.to change { appointment.reload.description }
             .from('Back pain').to('Stomach pain')
@@ -73,6 +75,21 @@ RSpec.describe AppointmentsController, type: :controller do
                  }.from(false).to(true)
 
           expect(request.flash[:notice]).to eq(notice_message)
+        end
+      end
+
+      context 'when invalid params' do
+        let(:recomendation) { 'Use pill' }
+        let(:alert_message) do
+          {
+            recomendation: ['is too short (minimum is 10 characters)']
+          }
+        end
+
+        it 'updates appointment' do
+          expect { update_request }.not_to(change { appointment.reload })
+
+          expect(request.flash[:alert].messages).to eq(alert_message)
         end
       end
     end

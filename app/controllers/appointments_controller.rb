@@ -61,7 +61,7 @@ class AppointmentsController < ApplicationController
         format.html { redirect_to appointment_path(@appointment), notice: 'Appointment was successfully updated.' }
         format.json { render :show, status: :ok, location: @appointment }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_appointment_path(@appointment), alert: @appointment.errors }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end
