@@ -41,3 +41,8 @@ jobs:
           bundle exec rake db:create
           bundle exec rake db:migrate
           bundle exec rspec spec
+      - name: Simplecov coverage
+        uses: joshmfrankel/simplecov-check-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
