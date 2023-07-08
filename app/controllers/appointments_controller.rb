@@ -29,6 +29,7 @@ class AppointmentsController < ApplicationController
 
   def create
     authorize! :create, Appointment
+    authorize! :create, TimeSlot
 
     @appointment = Appointment.new(create_params)
 
