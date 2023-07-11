@@ -12,7 +12,7 @@ $(document).on('change', function() {
     $("#selectable").selectable();
     $("#appointment_date").datepicker({
         defaultDate: "+1w",
-        dateFormat: 'dd/mm/yy',
+        dateFormat: 'yy/mm/dd',
         changeMonth: false,
         numberOfMonths: 1,
         minDate: 0,

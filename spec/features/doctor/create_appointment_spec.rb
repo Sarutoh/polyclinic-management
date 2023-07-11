@@ -5,6 +5,7 @@ RSpec.describe 'doctor create appointment', type: :feature, js: true do
   let(:password)     { 'password' }
   let!(:doctor) { create(:doctor, password: password, phone_number: phone_number) }
   let!(:patient) { create(:patient) }
+  let!(:tomorrow_day) { DateTime.tomorrow.day }
 
   before do
     login_user(phone_number, password)
@@ -14,6 +15,16 @@ RSpec.describe 'doctor create appointment', type: :feature, js: true do
       li = find('li.list-group-item', match: :first)
       li.click
     end
+
+    page.execute_script %{ $('input#appointment_date').datepicker({dateFormat: 'yy/mm/dd'}) }
+    find('input#appointment_date').click
+    page.execute_script %{ $("a.ui-state-default:contains('#{tomorrow_day}')").click() }
+
+    page.execute_script %{ $("#appointment_time_slot").val($('.active').text() + $('#appointment_date').val()) }
+
+    find('ul#selectable')
+    find('li.list-group-item.rounded', match: :first).click
+    find('li.list-group-item.rounded.active')
   end
 
   context 'when create appointment' do

@@ -5,7 +5,7 @@ RSpec.describe 'doctor left recomendation', type: :feature do
   let(:password)     { 'password' }
   let!(:doctor) { create(:doctor, password: password, phone_number: phone_number) }
   let!(:appointment) do
-    create(:appointment, doctor: doctor, time_slot: create(:time_slot, appointment_date: 2.days.ago))
+    create(:appointment, doctor: doctor, time_slot: create(:time_slot, appointment_date: 10.minutes.ago))
   end
   let(:recomendation) { 'Take more vitamins and go for a walk outside!' }
 
