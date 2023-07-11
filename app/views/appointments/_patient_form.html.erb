@@ -4,17 +4,17 @@
     <%= f.hidden_field :time_slot, required: true %>
 
     <div data-controller="get">
-      <label for="appointment_date">Choose a time for your appointment:</label>
-      <input class="form-control" type="text" id="appointment_date" value=<%= "#{Date.today.strftime("%d/%m/%y")}"%>>
-
-      <ul id="selectable" class="list-group list-group-horizontal flex-wrap d-flex my-2" data-controller="list">
-      </ul>
-
       <label> Category </label>
       <%= select("category", "category_id", @categories.collect {|c| [ c.name, c.id ] }, { include_blank: true }, { class: 'form-select', data: { action: "change->get#categoryDoctors" }} ) %>
 
       <%= f.label :doctor_id, class: 'form-label' %>
       <%= f.select :doctor_id, [], {}, { class: 'form-control', required: true, data: { action: "change->get#userSlots" }} %>
+
+      <label for="appointment_date">Choose a time for your appointment:</label>
+      <input class="form-control" type="text" id="appointment_date" value=<%= "#{Date.today.strftime("%d/%m/%y")}"%>>
+
+      <ul id="selectable" class="list-group list-group-horizontal flex-wrap d-flex my-2" data-controller="list">
+      </ul>
     </div>
 
     <%= f.submit 'Make appointment', class: "btn btn-success mt-2 me-2 float-sm-end" %>
