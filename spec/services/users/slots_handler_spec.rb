@@ -7,7 +7,7 @@ RSpec.describe Users::SlotsHandler do
     let(:patient) { create(:patient) }
     let(:doctor) { create(:doctor) }
     let(:hour) { '12:00' }
-    let(:date) { "02/03/2023 #{hour}" }
+    let(:date) { "#{Date.tomorrow.strftime('%y/%m/%d')} #{hour}" }
 
     context 'when users do not have booked appointments' do
       it { is_expected.to eq(Users::SlotsHandler::POSSIBLE_SLOTS) }
@@ -17,7 +17,7 @@ RSpec.describe Users::SlotsHandler do
       before do
         create(:appointment,
                patient: patient,
-               time_slot: create(:time_slot, appointment_date: DateTime.parse(date)))
+               time_slot: create(:time_slot, appointment_date: DateTime.tomorrow.midday.change(hour: 12)))
       end
 
       it { is_expected.to eq(Users::SlotsHandler::POSSIBLE_SLOTS.excluding(hour)) }

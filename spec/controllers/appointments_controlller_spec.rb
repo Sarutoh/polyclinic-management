@@ -16,7 +16,7 @@ RSpec.describe AppointmentsController, type: :controller do
             appointment: {
               doctor_id: doctor.id,
               patient_id: patient.id,
-              time_slot: '05/07/2023 12:00'
+              time_slot: "#{Date.tomorrow.strftime('%y/%m/%d')} 12:00"
             }
           }
 
@@ -26,23 +26,46 @@ RSpec.describe AppointmentsController, type: :controller do
       end
 
       context 'when invalid params' do
-        let(:alert_message) do
-          {
-            slot: ['cannot be nil. Please choose one.']
-          }
+        context 'when timeslot nil' do
+          let(:alert_message) do
+            {
+              slot: ['cannot be nil. Please choose one.']
+            }
+          end
+
+          it 'redirects to appointment show with alert' do
+            post :create, params: {
+              appointment: {
+                doctor_id: doctor.id,
+                patient_id: patient.id,
+                time_slot: ''
+              }
+            }
+
+            expect(response).to redirect_to(root_path)
+            expect(request.flash[:alert].messages).to eq(alert_message)
+          end
         end
 
-        it 'redirects to appointment show' do
-          post :create, params: {
-            appointment: {
-              doctor_id: doctor.id,
-              patient_id: patient.id,
-              time_slot: ''
+        context 'when timeslot invalid' do
+          let(:alert_message) do
+            {
+              date: ['has invalid value. Please choose another or try again!']
             }
-          }
+          end
 
-          expect(response).to redirect_to(root_path)
-          expect(request.flash[:alert].messages).to eq(alert_message)
+          it 'redirects to appointment show with alert' do
+            post :create, params: {
+              appointment: {
+                doctor_id: doctor.id,
+                patient_id: patient.id,
+                time_slot: '11/07/23 12:00'
+              }
+            }
+
+            expect(response).to redirect_to(root_path)
+            expect(request.flash[:alert].messages).to eq(alert_message)
+          end
         end
       end
     end
