@@ -1,0 +1,4 @@
+en:
+  success:
+    update: "%{record} was successfully updated."
+    create: "%{record} was successfully created."

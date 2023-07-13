@@ -22,16 +22,14 @@ class Appointment < ApplicationRecord
     unless time_slot.appointment_date.between?(
       Time.zone.today.beginning_of_day, MAX_DATEPICKER_RANGE.days.from_now.end_of_day
     )
-      errors.add(:date,
-                 'has invalid value. Please choose another or try again!')
+      errors.add(:date, I18n.t('appointment.invalid_date'))
     end
   end
 
   def validate_max_appointments
     return unless doctor.appointments.where(closed: false).count >= MAX_OPEN_APPOINTMENTS
 
-    errors.add(:doctor,
-               'has too many appointments!')
+    errors.add(:doctor, I18n.t('appointment.reach_the_maximum'))
   end
 
   private
