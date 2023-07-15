@@ -7,11 +7,7 @@
     </div>
 
     <div class="col-md-6 border border-2 border-light rounded-4 pb-2">
-      <% if current_user.patient? %>
-        <%= render "appointments/patient_form" %>
-      <% else %>
-        <%= render "appointments/doctor_form" %>
-      <% end %>
+      <%= render "appointments/#{current_user.type.downcase}_form" %>
     </div>
   </div>
 </div>

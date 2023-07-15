@@ -10,8 +10,8 @@
         <td><strong><%= @appointment.time_slot.appointment_date.to_fs(:long_ordinal) %></strong></td>
       </tr>
       <tr>
-        <th scope="row"><%= current_user.doctor? ? 'Patient' : 'Doctor'%></th>
-        <td colspan="2"><strong><%= current_user.doctor? ? @appointment.patient.full_name: @appointment.doctor.full_name %></strong></td>
+        <th scope="row"><%= AppointmentsPresenter.call(user_role: current_user) %></th>
+        <td colspan="2"><strong><%= AppointmentsPresenter.call(user_name: { user: current_user, appointment: @appointment}) %></strong></td>
       </tr>
       <tr>
         <th scope="row">Recomendation</th>
@@ -20,6 +20,6 @@
     </tbody>
   </table>
   <% if current_user.doctor? && !@appointment.closed? %>
-    <%= link_to 'Update appointment', edit_appointment_path(@appointment), class: 'btn btn-success', method: :get %>
+    <%= link_to t('buttons.appointment.update'), edit_appointment_path(@appointment), class: 'btn btn-success', method: :get %>
   <% end %>  
 </div>

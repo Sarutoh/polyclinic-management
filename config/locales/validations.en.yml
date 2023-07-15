@@ -1,0 +1,5 @@
+en:
+  appointment:
+    empty_slot: cannot be nil. Please choose one.
+    invalid_date: has invalid value. Please choose another or try again!
+    reach_the_maximum: has too many appointments!

@@ -38,12 +38,12 @@ class AppointmentsController < ApplicationController
       time_slot = TimeSlot.create(appointment_date: appointment_date)
       @appointment.time_slot = time_slot
     else
-      @appointment.errors.add(:slot, 'cannot be nil. Please choose one.')
+      @appointment.errors.add(:slot, t('appointment.empty_slot'))
     end
 
     respond_to do |format|
       if @appointment.errors.empty? && @appointment.save
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+        format.html { redirect_to @appointment, notice: t('success.create', record: @appointment.class_name) }
         format.json { render :show, status: :created, location: @appointment }
       else
         format.html { redirect_to root_path, alert: @appointment.errors }
@@ -59,7 +59,9 @@ class AppointmentsController < ApplicationController
 
     respond_to do |format|
       if @appointment.update(update_params)
-        format.html { redirect_to appointment_path(@appointment), notice: 'Appointment was successfully updated.' }
+        format.html do
+          redirect_to appointment_path(@appointment), notice: t('success.update', record: @appointment.class_name)
+        end
         format.json { render :show, status: :ok, location: @appointment }
       else
         format.html { redirect_to edit_appointment_path(@appointment), alert: @appointment.errors }
