@@ -10,11 +10,7 @@ class AppointmentsPresenter < BasePresenter
     user = params[:user]
     appointment = params[:appointment]
 
-    if user.doctor?
-      safe_join([tag.div(Patient.name), tag.strong(appointment.patient.full_name.to_s)])
-    else
-      safe_join([tag.div(Doctor.name), tag.strong(appointment.doctor.full_name.to_s)])
-    end
+    safe_join([tag.div(user_role(user)), tag.strong(opposite_user(user, appointment))])
   end
 
   def wait_to_recomend_id(appointment)
@@ -23,7 +19,22 @@ class AppointmentsPresenter < BasePresenter
     recomendate_policy(appointment) ? "#{WAIT}#{id}" : "#{INFO_BLOCK}#{id}"
   end
 
+  def user_role(user)
+    user.doctor? ? Patient.name : Doctor.name
+  end
+
+  def user_name(params)
+    user = params[:user]
+    appointment = params[:appointment]
+
+    opposite_user(user, appointment)
+  end
+
   private
+
+  def opposite_user(user, appointment)
+    user.doctor? ? appointment.patient.full_name.to_s : appointment.doctor.full_name.to_s
+  end
 
   def recomendate_policy(appointment)
     AppointmentsPolicy.new(appointment).able_to_recomendate?

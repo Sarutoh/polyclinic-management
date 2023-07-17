@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'user signed in', type: :feature do
+  subject(:result_page) { page }
   let!(:doctor) { create(:doctor, password: 'password') }
 
   before { login_user(doctor.phone_number, password) }
@@ -8,16 +9,12 @@ RSpec.describe 'user signed in', type: :feature do
   context 'when valid login params' do
     let(:password) { 'password' }
 
-    it 'signs me in' do
-      expect(page).to have_content 'You can make appointment right here'
-    end
+    it { is_expected.to have_content 'You can make appointment right here' }
   end
 
   context 'when invalid login params' do
     let(:password) { 'passwort' }
 
-    it 'show error' do
-      expect(page).to have_content 'Invalid Phone number or password.'
-    end
+    it { is_expected.to have_content 'Invalid Phone number or password.' }
   end
 end

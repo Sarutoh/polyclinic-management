@@ -38,7 +38,12 @@
         <%= f.label :phone_number, class: "fs-4 me-5"%>
       </div>
       <div class="col-5">
-        <%= f.phone_field :phone_number, autofocus: true, autocomplete: "phone_number", class: "form-control" %>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">+380</div>
+          </div>
+          <%= f.phone_field :phone_number, autofocus: true, autocomplete: "phone_number", class: "form-control" %>
+        </div>
       </div>
     </div>
 

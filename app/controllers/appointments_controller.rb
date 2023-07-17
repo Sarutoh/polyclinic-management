@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AppointmentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :set_appointment, only: %i[edit update show]
 
   def index
     authorize! :read, Appointment
@@ -13,8 +13,6 @@ class AppointmentsController < ApplicationController
   def show
     authorize! :read, Appointment
 
-    @appointment = Appointment.find(params[:id])
-
     respond_to do |format|
       format.html
       format.json { render json: @appointment }
@@ -23,13 +21,10 @@ class AppointmentsController < ApplicationController
 
   def edit
     authorize! :update, Appointment
-
-    @appointment = Appointment.find(params[:id])
   end
 
   def create
-    authorize! :create, Appointment
-    authorize! :create, TimeSlot
+    authorize! :create, Appointment, TimeSlot
 
     @appointment = Appointment.new(create_params)
 
@@ -38,12 +33,12 @@ class AppointmentsController < ApplicationController
       time_slot = TimeSlot.create(appointment_date: appointment_date)
       @appointment.time_slot = time_slot
     else
-      @appointment.errors.add(:slot, 'cannot be nil. Please choose one.')
+      @appointment.errors.add(:slot, t('appointment.empty_slot'))
     end
 
     respond_to do |format|
       if @appointment.errors.empty? && @appointment.save
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully created.' }
+        format.html { redirect_to @appointment, notice: t('success.create', record: @appointment.class_name) }
         format.json { render :show, status: :created, location: @appointment }
       else
         format.html { redirect_to root_path, alert: @appointment.errors }
@@ -55,11 +50,11 @@ class AppointmentsController < ApplicationController
   def update
     authorize! :update, Appointment
 
-    @appointment = Appointment.find(params[:id])
-
     respond_to do |format|
       if @appointment.update(update_params)
-        format.html { redirect_to appointment_path(@appointment), notice: 'Appointment was successfully updated.' }
+        format.html do
+          redirect_to appointment_path(@appointment), notice: t('success.update', record: @appointment.class_name)
+        end
         format.json { render :show, status: :ok, location: @appointment }
       else
         format.html { redirect_to edit_appointment_path(@appointment), alert: @appointment.errors }
@@ -69,6 +64,10 @@ class AppointmentsController < ApplicationController
   end
 
   private
+
+  def set_appointment
+    @appointment = Appointment.find(params[:id])
+  end
 
   def create_params
     params.require(:appointment).permit(:doctor_id, :appointment_date, :patient_id).except(:category_id, :time_slot)
