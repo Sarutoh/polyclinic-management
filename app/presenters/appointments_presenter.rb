@@ -10,7 +10,7 @@ class AppointmentsPresenter < BasePresenter
     user = params[:user]
     appointment = params[:appointment]
 
-    safe_join([tag.div(opposite_type(user)), tag.strong(opposite_user(user, appointment))])
+    safe_join([tag.div(user_role(user)), tag.strong(opposite_user(user, appointment))])
   end
 
   def wait_to_recomend_id(appointment)
@@ -20,7 +20,7 @@ class AppointmentsPresenter < BasePresenter
   end
 
   def user_role(user)
-    opposite_type(user)
+    user.doctor? ? Patient.name : Doctor.name
   end
 
   def user_name(params)
@@ -34,10 +34,6 @@ class AppointmentsPresenter < BasePresenter
 
   def opposite_user(user, appointment)
     user.doctor? ? appointment.patient.full_name.to_s : appointment.doctor.full_name.to_s
-  end
-
-  def opposite_type(user)
-    user.doctor? ? Patient.name : Doctor.name
   end
 
   def recomendate_policy(appointment)

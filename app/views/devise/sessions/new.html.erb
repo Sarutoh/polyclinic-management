@@ -9,8 +9,11 @@
           <div class="mb-4">
             <h2>Log in</h2>
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="form-group">
-                <%= f.label :phone_number %><br />
+              <%= f.label :phone_number %>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">+380</div>
+                </div>
                 <%= f.phone_field :phone_number, autofocus: true, autocomplete: "phone_number", class: "form-control" %>
               </div>
 

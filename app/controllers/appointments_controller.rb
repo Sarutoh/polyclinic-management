@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AppointmentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :set_appointment, only: %i[edit update show]
 
   def index
     authorize! :read, Appointment
@@ -13,8 +13,6 @@ class AppointmentsController < ApplicationController
   def show
     authorize! :read, Appointment
 
-    @appointment = Appointment.find(params[:id])
-
     respond_to do |format|
       format.html
       format.json { render json: @appointment }
@@ -23,13 +21,10 @@ class AppointmentsController < ApplicationController
 
   def edit
     authorize! :update, Appointment
-
-    @appointment = Appointment.find(params[:id])
   end
 
   def create
-    authorize! :create, Appointment
-    authorize! :create, TimeSlot
+    authorize! :create, Appointment, TimeSlot
 
     @appointment = Appointment.new(create_params)
 
@@ -55,8 +50,6 @@ class AppointmentsController < ApplicationController
   def update
     authorize! :update, Appointment
 
-    @appointment = Appointment.find(params[:id])
-
     respond_to do |format|
       if @appointment.update(update_params)
         format.html do
@@ -71,6 +64,10 @@ class AppointmentsController < ApplicationController
   end
 
   private
+
+  def set_appointment
+    @appointment = Appointment.find(params[:id])
+  end
 
   def create_params
     params.require(:appointment).permit(:doctor_id, :appointment_date, :patient_id).except(:category_id, :time_slot)
