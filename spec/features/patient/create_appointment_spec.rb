@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'patient create appointment', type: :feature, js: true do
-  let(:phone_number) { '+38099887766' }
+  let(:phone_number) { '998877660' }
   let(:password)     { 'password' }
   let!(:doctor1) { create(:doctor) }
   let!(:doctor2) { create(:doctor) }
