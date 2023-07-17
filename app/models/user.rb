@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  PHONE_LENGTH = {
-    min: 9,
-    max: 14
-  }.freeze
+  PHONE_LENGTH = 9
+  COUNTRY_PHONE_CODE = '+380'
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:phone_number]
@@ -12,12 +10,16 @@ class User < ApplicationRecord
   validates :phone_number, uniqueness: true,
                            presence: true,
                            numericality: true,
-                           length: { minimum: PHONE_LENGTH[:min], maximum: PHONE_LENGTH[:max] }
+                           length: { is: PHONE_LENGTH }
 
   has_one_attached :avatar
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def full_phone_number
+    "#{COUNTRY_PHONE_CODE}#{phone_number}"
   end
 
   def admin?
