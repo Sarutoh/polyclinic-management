@@ -6,7 +6,7 @@ RSpec.describe AppointmentsPresenter do
   context '#participant' do
     subject(:presenter) { described_class.call(participant: params) }
 
-    let(:tag) { "<div>#{opposite_class_name}</div><strong>#{opposite_user.full_name}</strong>" }
+    let(:tag) { CGI.unescape_html("<div>#{opposite_class_name}</div><strong>#{opposite_user.full_name}</strong>") }
     let(:params) { { user: user, appointment: appointment } }
 
     context 'when doctor' do
